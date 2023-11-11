@@ -4,9 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>とりさんのポートフォリオ</title>
+    <meta name="description" content="とある情報系高専生のポートフォリオです。">
+    <link rel="stylesheet" href="style.css">
+    <link
+        rel="stylesheet"
+        href="https://unpkg.com/modern-css-reset/dist/reset.min.css"
+    />
 </head>
 <body>
-    <header>
+    <!-- <header>
         <div>
             <ul>
                 <li><a href="/">Home</a></li>
@@ -16,38 +22,49 @@
                 <li><a href="/Contact">Contact</a></li>
             </ul>
         </div>
-    </header>
+    </header> -->
     <main>
-        <h1>とりさんのポートフォリオ</h1>
+        <div class="head_container">
+            <h1 class="">とりさんのポートフォリオ</h1>
+        </div>
 
-        <div>
-            <h1>About Me</h1>
-            <table>
-                <tr>
-                    <th>name</th>
-                    <th>とりさん</th>
-                </tr>
-                <tr>
-                    <th>birthday</th>
-                    <th>2006/04/30</th>
-                </tr>
-                <tr>
-                    <th>From</th>
-                    <th>大阪</th>
-                </tr>
-                <tr>
-                    <th>所属</th>
-                    <th>大阪公立大高専<br>総合工学システム学科<br>知能情報コース</th>
-                </tr>
-                <tr>
-                    <th>Hobby</th>
-                    <th>ゲーム、自作PC、プログラミング、動画編集</th>
-                </tr>
-            </table>
+
+        <div class="section_container">
+            
+            <h2>About Me</h2>
+
+            <div class="section_container_container">
+                <img src="images/icon.png" alt="アイコン">
+                <table class="about_me_table">
+                    <tr>
+                        <th>name</th>
+                        <th>とりさん</th>
+                    </tr>
+                    <tr>
+                        <th>birthday</th>
+                        <th>2006/04/30</th>
+                    </tr>
+                    <tr>
+                        <th>From</th>
+                        <th>大阪</th>
+                    </tr>
+                    <tr>
+                        <th>Affiliation</th>
+                        <th>大阪公立大高専 総合工学システム学科 知能情報コース</th>
+                    </tr>
+                    <tr>
+                        <th>Hobby</th>
+                        <th>ゲーム、自作PC、プログラミング、動画編集</th>
+                    </tr>
+                </table>
+            </div>
+            
         </div>
 
         <div>
-            <h1>History</h1>
+            <div class="head">
+                <h1>History</h1>
+            </div>
             <ul>
                 <li>
                     <div class="timeline-date">2022/04/08</div>
