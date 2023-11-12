@@ -57,7 +57,7 @@ header {
     background-color: black;
     color: white;
     margin-bottom: 20px;
-    background-image: linear-gradient(rgb(49, 49, 49),rgb(49, 49, 49,0),rgba(49,49,49)),url(./images/top/cording.png);
+    background-image: linear-gradient(rgb(49, 49, 49),rgb(49, 49, 49,0),rgba(49,49,49)),url(images/top/cording.png);
     background-position: center;
     background-size: cover;
 }
