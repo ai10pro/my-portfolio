@@ -201,7 +201,7 @@ footer {
 }
 
 .works_section .container .card {
-    width: 300px;
+    width: 450px;
     padding: 20px 10px;
     border: 3px solid #00c3ff;
     border-radius: 5px;
@@ -209,7 +209,10 @@ footer {
 }
 
 .works_section .container .card img {
-    max-width: 250px;
+    margin-inline: auto;
+    max-width: 400px;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, .2);
+    margin-block: 10px;
 }
 
 /* skillsページ */
