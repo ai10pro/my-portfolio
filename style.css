@@ -250,6 +250,12 @@ footer {
     box-shadow: 5px 5px 5px rgba(0, 0, 0, .2);
     margin-block: 10px;
 }
+.works_section .container .card video {
+    margin-inline: auto;
+    max-width: 300px;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, .2);
+    margin-block: 10px;
+}
 
 @media ( min-width : 640px ){
     .works_section .container .card {
