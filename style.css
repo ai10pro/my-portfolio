@@ -72,7 +72,7 @@ header {
     }
 }
 
-
+/* Index→メイン→ヘッドコンテント */
 .head_container {
     width: 100%;
     height: 100vh;
@@ -84,7 +84,6 @@ header {
     background-position: center;
     background-size: cover;
 }
-
 .head_container h1 {
     text-align: center;
     padding-top: 300px;
@@ -92,6 +91,7 @@ header {
     font-weight: 700;
 }
 
+/* Index→メイン→自己紹介 */
 .about_me_section {
     /* font-family: 'DotGothic16', sans-serif; */
     text-align: center;
@@ -141,6 +141,7 @@ header {
     color: rgb(0, 200, 255);
 }
 
+/* Index→メイン→タイムライン */
 .timeline {
     list-style: none;
 }
@@ -189,6 +190,82 @@ header {
     }
 }
 
+/* Index→メイン→記事 */
+.Article_section {
+    /* font-family: 'DotGothic16', sans-serif; */
+    text-align: center;
+    padding-block: 25px;
+    margin-inline: 20px;
+}
+
+.Article_container {
+    display: flex;
+    justify-content: center;
+    padding: 30px;
+    margin: 10px 0px;
+    flex-wrap: wrap;
+}
+
+.Article_card {
+    background-color: rgb(218, 218, 218);
+    width: 60vw;
+    max-width: 1000px;
+    min-width: 550px;
+    padding: 20px;
+    margin-bottom: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+.Article_title {
+    display: flex;
+    justify-content: space-between;
+}
+.Article_title h3 {
+    font-size: 20pt;
+    padding-inline: 20px;
+    margin-left: 20px;
+    border-bottom: black solid 1px;
+}
+.Article_title p {
+    padding-inline: 20px;
+    margin-left: 20px;
+    margin-block: auto;
+}
+
+.Article_content{
+    padding-inline: 20px;
+    padding-block-start: 20px;
+    text-align: left;
+}
+.view_more {
+    text-align: right;
+    margin-block: 10px;
+    margin-inline: auto 0;
+
+    width: 100%;
+    max-width: 180px;
+    height: 40px;
+    position: relative;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 9999px;
+    border: 1px solid #045cd4;
+    color: #045cd4;
+    background-color: #fff;
+    box-shadow: 0 6px 0 #045cd4;
+    transition: all 0.3s ease;
+}
+.view_more:hover {
+    color: #fff;
+    background-color: #045cd4;
+    box-shadow: 0 0 0 #045cd4;
+    transform: translateY(6px);
+}
+
+
+
+/* フッター */
 footer {
     text-align: center;
     background-color: black;
