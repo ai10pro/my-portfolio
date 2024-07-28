@@ -5,7 +5,7 @@
 body {
     font-family: 'Noto Sans JP', sans-serif;
     font-weight: 400;
-    font-size: 16px;
+    font-size: 16pt;
 }
 
 h2 {
@@ -301,10 +301,6 @@ footer {
     font-weight: 700;
 }
 
-.works_section {
-    
-}
-
 .works_section .container {
     display: flex;
     flex-wrap: wrap;
@@ -395,4 +391,82 @@ footer {
     font-size: 30px;
     font-weight: 800;
     padding-top: 10px;
+}
+
+/* Articleたち */
+#article-main{
+    background-color: rgb(255, 255, 255);
+    width: 80vw;
+    max-width: 1200px;
+    min-width: 550px;
+    margin-inline: auto;
+    margin-block: 20px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+.article-head {
+    text-align: left;
+    padding-block: 25px;
+    margin-block: 20px;
+    margin-inline: auto;
+}
+.article-head h1 {
+    font-size: 40pt;
+    font-weight: 700;
+    padding-inline: 20px;
+    margin-inline: 20px;
+    border-bottom: rgb(20, 199, 44) solid 5px;
+    max-width: 100%;
+}
+.article-head .day {
+    text-align: right;
+    font-size: 20px;
+    padding-inline: 20px;
+    margin-inline: 20px;
+    margin-block: auto;
+}
+.article-head .tag {
+    text-align: left;
+    font-size: 20px;
+    padding-inline: 20px;
+    margin-inline: 20px;
+    margin-block: auto;
+}
+
+.large-section h2{
+    text-align: left;
+    font-size: 30pt;
+    font-weight: 700;
+    padding-inline: 20px;
+    margin-inline: 20px;
+    margin-block: 10px;
+    border-bottom: rgb(20, 199, 44) ridge 5px;
+    max-width: 100%;
+}
+.large-section h3 {
+    text-align: left;
+    font-size: 25pt;
+    font-weight: 700;
+    padding-inline: 20px;
+    margin-inline: 20px;
+    margin-block : 10px;
+    border-left: rgb(20, 199, 44) solid 5px;
+    max-width: 100%;
+}
+.large-section p {
+    text-align: left;
+    font-size: 12pt;
+    padding-inline: 20px;
+    margin-inline: 20px;
+
+}
+
+.code_container {
+    width: 90%;
+    margin-inline: auto;
+    font-size: 13pt;
+}
+.large-section img {
+    width: 90%;
+    margin-inline: auto;
 }
