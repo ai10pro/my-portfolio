@@ -36,7 +36,90 @@
         <div class="article-head">
             <h1>Reactを使ってみた！</h1>
             <p class="day">公開日：2024/07/28(sun)</p>
-            <p class="tag">Reactの基本的な使い方を学びます。</p>
+            <p class="tag">React公式チュートリアルを実践！フロントエンドではお馴染みになりつつあるReactを勉強します！</p>
+        </div>
+
+        <div class="large-section">
+            <h2>1. Reactについて</h2>
+            <h3>1.1 Reactとは？</h3>
+            <p>ReactとはJavaScriptのオープンソースフレームワーク・ライブラリの1つ。Meta社（旧Facebook）が2011年に社内用で開発していたライブラリを2013年に一般公開されたもの。<br>
+            <a href="https://ja.react.dev/">React 公式サイト</a><br>
+            <a href="https://ja.legacy.reactjs.org/">旧React 公式サイト</a><br>
+            現在では日本でもフロントエンド開発の主流となっている。
+            </p>
+            <h3>1.2 Reactの特徴</h3>
+            <h4>コンポーネント化によるUI作成</h4>
+            <p>Reactの一番の特徴はUIをコンポーネントを利用して開発を行う点である。Webサイトにおける1部分をリンクボタン、説明文、動画など同じ内容を繰り返し使うものをコンポーネント化し、それらを組み合わせて作り上げていく。これにより、コードの再利用性が高まり、保守性が向上する。<br>
+            <h4>マークアップとコードからコンポーネントを作成</h4>
+            <p>JSXと呼ばれるマークアップ構文を用いて開発を行う。JSXはHTMLと同様にコードを書くことができるため追加の技術取得をあまり必要としない。また、ReactコンポーネントはあくまでJavaScriptの関数と定義するためIf文などを用いて、条件分岐の表示の対応がしやすい。</p>
+            <h4>仮想DOM</h4>
+            <p>Reactは仮想DOM（Virtual Document Object Model）を用いて、実際のDOMとの差分を計算し、最小限の更新を行うことができる。これにより、パフォーマンスの向上が期待できる。</p>
+            <h4>フレームワークの利用</h4>
+            <p>Reactはあくまでライブラリであり、コンポーネントの組み合わせが可能であるが、外部からのデータ取得などの指定がなあい。その場合Next.jsなどフルスタックのフレームワークを使うことであらゆるUIを作成できる。</p>
+            <h4>あらゆるプラットフォーに対応</h4>
+            <p>ReactはJavaScriptコードを段階的にロードすることにより、ウェブアプリの素早い読み込みを実現している。そのため、多くのウェブブラウザでの動作が保証されている。<br>
+                また、同Meta社が開発したReactNativeの利用により、クラスプラットフォームアプリ開発、すなわち、iOSアプリ、Androidアプリの作成が可能である。</p>
+            </p>
+        </div>
+        <div class="large-section">
+            <h2>2. Reactの基本</h2>
+            <h3>2.1 Reactチュートリアルについて</h3>
+            <p>公式サイトのドキュメントとして公開されている三目並べを作成する。また、ここではHTMLとJavaScriptについて多少慣れていることを前提として作られているため随時JavaScriptドキュメントなどの活用が考えられる。<br>
+            <a href="https://ja.react.dev/learn/tutorial-tic-tac-toe">React公式 チュートリアル:三目並べ</a><br>
+            <a href="https://ja.legacy.reactjs.org/tutorial/tutorial.html">旧React公式 チュートリアル:三目並べ</a><br>
+            以上サイトを参照し、Reactの基本を学ぶ。旧サイトは現在更新されていないが、一部説明などが詳しいため参照している。</p>
+            
+            <h3>2.2 Reactの環境構築</h3>
+            <p>Reactは本来ローカル環境を構築し、開発を行う。その手順を簡易的に示すが、今回はウェブブラウザ上でコード記述を行い実行を確認する。<br>
+            <a href="https://ja.legacy.reactjs.org/tutorial/tutorial.html#setup-option-2-local-development-environment">環境構築手順（旧公式サイト）</a><br>
+            1. Node.jsのインストール<br>
+            2. 以下コマンドの実行により新規プロジェクトを作成 <br>*my-app*はプロジェクト名が入る。<br>
+            <div class="code_container">
+                <pre class="prism code-content">
+<code class="language-cmd" data-lang="cmd">npx create-react-app *my-app*</code></pre>
+            </div>
+            <p>3. 以下コマンドによりプロジェクトを起動</p>
+            <div class="code_container">
+                <pre class="prism code-content">
+<code class="language-cmd" data-lang="cmd">cd *my-app*<br>npm start</code></pre>
+            </div>
+            <p>4. ブラウザでlocalhost:3000にアクセスし、Reactの初期画面が表示されれば成功</p></p>
+
+            <h3>2.3 チュートリアルの環境構築</h3>
+            <p>チュートリアルではCodeSandBoxというサイトを利用してコーディングを行う。<br>
+            <a href="https://codesandbox.io/s/new">CodeSandBox</a><br>
+            </p>
+        </div>
+
+        <div class="large-section">
+            <h2>3. チュートリアル：三目並べ</h2>
+            <p>
+                <a href="https://codesandbox.io/s/q2z497?file=%2Fsrc%2FApp.js&utm_medium=sandpack">チュートリアルで公開されている完成形</a>
+            </p>
+            <h3>3.1 チュートリアルのセットアップ</h3>
+            <p>以下のサイトにアクセスし、セットアップ済みのコードに追加でコーディングを行う<br>
+            <a href="https://codesandbox.io/s/j67kkz?file=%2Fsrc%2FApp.js&utm_medium=sandpack">セットアップ済みのプロジェクト</a>
+            <br>
+            このサイトではすでにプロジェクトが作成されており、Browserに表示されるのはDevelopされたものとなる。<br>
+            CodeSandboxの画面は次のようになっている。<br>
+            <img src="../../images/articles/01_react/001.png" alt="CodeSandboxのスクリーンショット"><br>
+            画面左にあるのは<span class="bg-yellow">ファイルセクション</span>であり、App.jsやstyle.cssなどファイルが表示されている。ここには各種ファイルを追加する際に表示される。画面中央は<span class="bg-yellow">コードエディタ</span>であり、開いているコードを確認・編集が可能。画面右側は<span class="bg-yellow">Browserセクション</span>であり、コードを実行した際の表示がされる。<br>
+            </p>
+
+            <h3>3.2 スタートアップコードの確認</h3>
+            <p>
+                <h4>App.js</h4>
+                <div class="code_container">
+                    <pre class="prism line-numbers language-js code-content">
+<code class="language-js" data-lang="js">export default function Square() {
+    return &ltbutton className="square"&gtX&lt/button&gt;
+}
+</code></pre>
+                </div>
+                <p>1行目は<span class="bg-code">Square関数</span>の定義を行っている。<span class="bg-code">export</span>というJavaScriptのキーワードはこの関数を外部からアクセスできるようにするもの。<span class="bg-code">default</span>というキーワードは他ファイルから参照の際この関数がこのファイルのメイン関数であることを示している。</p>
+
+            </p>
+
         </div>
 
         <div class="large-section">
