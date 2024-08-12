@@ -74,6 +74,7 @@
             <a href="https://ja.legacy.reactjs.org/tutorial/tutorial.html#setup-option-2-local-development-environment">環境構築手順（旧公式サイト）</a><br>
             1. Node.jsのインストール<br>
             2. 以下コマンドの実行により新規プロジェクトを作成 <br>*my-app*はプロジェクト名が入る。<br>
+            </p>
             <div class="code_container">
                 <pre class="prism code-content">
 <code class="language-cmd" data-lang="cmd">npx create-react-app *my-app*</code></pre>
@@ -83,7 +84,7 @@
                 <pre class="prism code-content">
 <code class="language-cmd" data-lang="cmd">cd *my-app*<br>npm start</code></pre>
             </div>
-            <p>4. ブラウザでlocalhost:3000にアクセスし、Reactの初期画面が表示されれば成功</p></p>
+            <p>4. ブラウザでlocalhost:3000にアクセスし、Reactの初期画面が表示されれば成功</p>
 
             <h3>2.3 チュートリアルの環境構築</h3>
             <p>チュートリアルではCodeSandBoxというサイトを利用してコーディングを行う。<br>
@@ -107,18 +108,225 @@
             </p>
 
             <h3>3.2 スタートアップコードの確認</h3>
-            <p>
                 <h4>App.js</h4>
                 <div class="code_container">
                     <pre class="prism line-numbers language-js code-content">
 <code class="language-js" data-lang="js">export default function Square() {
     return &ltbutton className="square"&gtX&lt/button&gt;
 }
-</code></pre>
-                </div>
-                <p>1行目は<span class="bg-code">Square関数</span>の定義を行っている。<span class="bg-code">export</span>というJavaScriptのキーワードはこの関数を外部からアクセスできるようにするもの。<span class="bg-code">default</span>というキーワードは他ファイルから参照の際この関数がこのファイルのメイン関数であることを示している。</p>
+</code></pre></div>
 
+                <p>1行目は<span class="bg-code">Square関数</span>の定義を行っている。<span class="bg-code">export</span>というJavaScriptのキーワードはこの関数を外部からアクセスできるようにするもの。<span class="bg-code">default</span>というキーワードは他ファイルから参照の際この関数がこのファイルのメイン関数であることを示している。</p>
+                <h4>style.css</h4>
+                <p>すでに習得済みとして説明を省略する。ただし、Reactではclassで定義されたものには割り当てられない。<span class="bg-yellow">className</span>で定義されているものに対してstyle.cssが割り当てたられる。</p>
+                <h4>index.js</h4>
+                <div class="code_container">
+                    <pre class="prism line-numbers language-js code-content">
+<code class="language-js" data-lang="js">import { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
+import './styles.css';
+
+import App from './App';
+</code></pre></div>
+                <p>今回のチュートリアルにてこのファイルは編集しない。しかし、今ファイルはApp.jsなどコンポーネントと、ウェブブラウザの橋渡しをする最も重要なファイルである。
+                    <br>このファイルにて以下の4つの部品の取り出しをおこなっている。
+                    <ul>
+                        <li>React</li>
+                        <li>WebブラウザとReactのやりとりを行うReact DOM</li>
+                        <li>コンポーネント用のスタイル（style.css）</li>
+                        <li>App.jsにて作成したコンポーネント</li>
+                    </ul>
+                    <p>これらの部品を呼び出し、まとめ、Public内のindex.htmlに入れることにより、JavaScriptでの記述をWebブラウザで表示できる。
+                </p></p>
+            
+            <h3>3.3 三目並べの盤面の作成</h3>
+            <h4>2マス目を作る</h4>
+            <p>三目並は盤面が9マス必要ですが、1マスしかありません。単純にbuttonタグをコピーペーストし実行しようとすると次のようなTypeエラーが出ます。
+                <br><p class="bg-code">Cannot assign to read only property 'message' of object 'SyntaxError: /src/App.js: Adjacent JSX elements must be wrapped in an enclosing tag. Did you want a JSX fragment &lt&gt...&lt/&gt? (3:2)</p>
+                <p>これはReactコンポーネントの性質あり、コンポーネが返す（Return）の値は1つにまとめられたものである必要があるためである。buttonのJSX要素を複数返したい場合はフラグメントと呼ばれる「<span class="bg-code">&lt&gt</span>」、「<span class="bg-code">&lt/&gt</span>」で囲うことによりこの複数の要素の値を返すことができる。
+                <br>修正したプログラムと実行結果は次のとおりになる。</p>
+                <div class="code_container">
+                    <pre class="prism line-numbers language-js code-content">
+<code class="language-js" data-lang="js">export default function Square() {
+    return (
+        &lt&gt
+            &ltbutton className="square"&gtX&lt/button&gt
+            &ltbutton className="square"&gtX&lt/button&gt
+        &lt/&gt
+    );
+}
+</code></pre></div>
+                <p>
+                    <img src="../../images/articles/01_react/002.png" alt="2マス目の表示のための修正後">
+                </p>
             </p>
+            <h4>2マス目以降の作成</h4>
+            <p>前のようにコピーペーストを続ければ9マスを作ることができるのですが、しかしこのままであると9マス分のコードが必要となりますし、buttonの子要素にはXが入っていますが○になる場合もありその度にどこの行の処理が必要か考えるのは大変である。そこでReactの強みであるコンポーネントを作成することで再利用可能で可読性の高いものにする。</p>
+            <p>初めに関数名を次のように変え、今から作るものがSquareを組み合わせてできたBoardを作るものとして関数名を変える。</p>
+            <div class="code_container">
+                <pre class="prism line-numbers language-js code-content">
+<code class="language-js" data-lang="js">export default function Board() {
+    //......
+}
+</code></pre></div>
+            <p>次にSquare関数を先ほどのButtonで作成しそれを、Board関数内で呼び出す。ここで<span class="bg-code">board-row</span>というクラスを与えているが、このクラスにはボタンを折り返して表示させるた目の親要素のStyleが割り当てられている。</p>
+            <div class="code_container">
+                <pre class="prism line-numbers language-js code-content">
+<code class="language-js" data-lang="js">function Square() {
+    return &ltbutton className="square"&gt1&lt/button&gt;
+}
+
+export default function Board() {
+    return (
+        &lt&gt
+            &ltdiv className="board-row"&gt
+                &ltSquare /&gt
+                &ltSquare /&gt
+                &ltSquare /&gt
+            &lt/div&gt
+            &ltdiv className="board-row"&gt
+                &ltSquare /&gt
+                &ltSquare /&gt
+                &ltSquare /&gt
+            &lt/div&gt
+            &ltdiv className="board-row"&gt
+                &ltSquare /&gt
+                &ltSquare /&gt
+                &ltSquare /&gt
+            &lt/div&gt
+        &lt/&gt
+    );
+}
+</code></pre></div>
+            <p><span class="bg-code">Square</span>関数の定義時、先頭に<span class="bg-code">export default</span>を入れてはいけない。入れてしまうことにより前述したとおり、App.jsを読み込んだ際、メイン関数であると認識されてしまうためである。</p>
+            <p><span class="bg-code">Board</span>関数内にて別コンポーネントの呼び出しはコードのようになる。ここでは関数名（コンポーネント名）の先頭は大文字になるという点に注意が必要である。また、ファイルをまたいでの呼び出し時には次のように先頭にて該当ファイルの読み込みを行う必要がある。</p>
+            <div class="code_container">
+                <pre class="prism line-numbers language-js code-content">
+<code class="language-js" data-lang="js">import Square from './Square';
+</code></pre></div>
+            <img src="../../images/articles/01_react/003.png" alt="">
+            <p>このままでは全てのマスが1で固定されてしまうため、Squareコンポーネントの呼び出しの際に値を指定したい。そのためSquare関数にプロパティを入力できるようにする。この方法はHTMLにJavaScriptやFlaskを用いたPython WebAPPの開発時と同じ方法である。</p>
+            <div class="code_container">
+                <pre class="prism line-numbers language-js code-content">
+<code class="language-js" data-lang="js">function Square({value}) {
+    return &ltbutton className="square"&gt{value}&lt/button&gt;
+}
+export default function Board() {
+    return (
+        &lt&gt
+            &lt div className="board-row" &gt
+                &lt Square value="1" /&gt
+                &lt Square value="2" /&gt
+                &lt Square value="3" /&gt
+            &lt /div&gt
+            /....
+        &lt /&gt
+    );
+}
+</code></pre></div>
+            <img src="../../images/articles/01_react/004.png" alt="">
+            <p>このようにpropsを引数に取り、その中のvalueを表示することで、Board関数内でSquare関数を呼び出す際に値を指定することができる。</p>
+
+            <h3>3.3 盤面での処理の追加</h3>
+            <h4>インタラクティブなコンポーネントの設計</h4>
+            <p>簡単な処理として各ボタンを押すたびにそれがXに変わる動作を設計する。<span class="bg-code">Square</span>関数の中に<span class="bg-code">handleClick</span>関数を定義し、呼び出しのpropsに<span class="bg-code">onClick</span>を追加する。</p>
+            <div class="code_container">
+                <pre class="prism line-numbers language-js code-content">
+<code class="language-js" data-lang="js">function Square({value}) {
+    function handleClick() {
+        console.log('clicked!');
+    }
+    return 
+        &ltbutton className="square" onClick={onClick}&gt
+        {value}
+        &lt/button&gt;
+}
+</code></pre></div>
+            <p>このプログラムでの動作を確認する。Consoleを開いた状態でかく番号を押すたびに<span class="bg-code">clicked!</span>というように出力されていれば問題ない。<br>
+            ここでわかるように各このポーネンとの中で関数を新たに定義することができその関数を利用した動作を出力させることができる。</p>
+            <img src="../../images/articles/01_react/005.png" alt="">
+            <p>ここで、<span class="bg-code">handleClick</span>関数をSquare関数の外で定義したプログラムを試す。</p>
+            <div class="code_container">
+                <pre class="prism line-numbers language-js code-content">
+<code class="language-js" data-lang="js">function Square({value}) {
+    return
+        &ltbutton className="square" onClick={handleClick}&gt
+        {value}
+        &lt/button&gt;
+}
+function handleClick() {
+    console.log('clicked!');
+}
+</code></pre></div>
+            <p>実際に動作を確認してみたところ先ほどと同様の処理が行われていることがわかった。このようにコンポーネント外での関数定義にも対応していることがわかった。しかしコードの可読性や、使い回し、保守を考えた時必要なコンポーネントを必要な場所で記載したほうが良いのではないかと個人的には考えた。
+            </p>
+            
+            <p>次にSquareコンポーネントにてクリックされたことを記憶し、"X"を表示する機能を実装する。「記憶」するためにはReactコンポーネントの<span class="bg-yellow">state</span>というものを利用する。
+            <br>ReactはuseStateと関数の提供があり、これを利用することでコンポーネント内で状態を保持することができる。useStateは配列を返し、その中に状態の初期値を入れることができる。また、useStateは2つの要素を返す。1つ目は状態の値、2つ目は状態を更新するための関数である。
+            <p>ファイルの先頭にて<span class="bg-code">useState</span>をインポートし<span class="bg-code">Square</span>関数からvalueのpropsプロパティを削除する。その代わりに2つの要素の配列にて<span class="bg-code">useState</span>を呼び出す。</p>
+            <div class="code_container">
+                <pre class="prism line-numbers language-js code-content">
+<code class="language-js" data-lang="js">import { useState } from 'react';
+
+function Square() {
+    const [value, setValue] = useState(null);
+
+    function handleClick() {
+    //...
+}}
+</code></pre></div>
+            <p><span class="bg-code">value</span>がstateの現在の値を格納し、<span class="bg-code">setValue</span>はその値の更新に使う関数ということになる。<span class="bg-code">useState</span>にわたすNullはstate変数の初期値として使用するため今回の場合<span class="bg-code">value</span>は<span class="bg-code">null</span>という値から処理が行われる</p>
+            <p>次に<span class="bg-code">handleClick</span>関数内で<span class="bg-code">setValue</span>を使い、クリックされた際にvalueの値を変更する。ここでは"X"を表示するようにする。
+            <br>値の変更には先ほど定義している<span class="bg-code">setValue</span>関数を使用し以下のような記述を行う。</p>
+            <br>また、コンポーネント自体がpropsの受け取りを行わないため、Boardコンポーネントので呼び出されるSquareコンポーネントのpropsを削除する。</p>
+            <div class="code_container">
+                <pre class="prism line-numbers language-js code-content">
+<code class="language-js" data-lang="js">import { useState } from 'react';
+function Square() {
+    const [value, setValue] = useState(null);
+
+    function handleClick() {
+        setValue('X');
+    }
+    return(
+        &ltbutton className="square" onClick={handleClick}&gt
+        {value}
+        &lt/button&gt;
+    );
+}
+
+export default function Board() {
+    return (
+        &lt&gt
+            &lt div className="board-row" &gt
+                &lt Square /&gt
+                &lt Square /&gt
+                &lt Square /&gt
+            &lt/div&gt
+            /....
+        &lt/&gt
+    );
+}
+</code></pre></div>
+            <img src="../../images/articles/01_react/006.png" alt="">
+            <p>このようにクリックされた際に"X"が表示されるようになった。このようにReactではコンポーネントの再利用性が高く、コードの可読性が高いため、保守性が高いコードを書くことができる。</p>
+
+            <h3>3.4 ゲームの状態を管理する</h3>
+            <p>ゲームのデータ保持にはいくつか方法がある。ここで考えなければいけないのは"○"と"X"の処理があるという点だ。それぞれどこの盤面でどちらが入力されているかを先ほどのように<span class="bg-code">Square</span>コンポーネント内で保持する方法が最初に考えられる。しかしこの方法は今後ゲームの終了処理を行う際複数の値をSquareコンポーネントに移動し確認する処理が必要となり現実的ではない。よってこの方法は使わないこととする。</p>
+            <p>別の方法として<span class="bg-code">Board</span>コンポーネントにてどのマスがどの状態であるかを一括で管理（配列を使った管理）にすることで終了処理の実装も比較的容易に実装可能である。よってこの方法を採用する。</p>
+            <p>まずはBoardコンポーネントにてstateを定義し、その中に9つのマスの状態を保持する配列を定義する。<span class="bg-code">squares</span>という名前のstate変数を宣言し、デフォルト値は<span class="bg-code">null</span>を返す。</p>
+            <div class="code_container">
+                <pre class="prism line-numbers language-js code-content">
+<code class="language-js" data-lang="js">//...
+export default function Board() {
+    const [squares, setSquares] = useState(Array(9).fill(null));
+    return (
+        //...
+    );
+}
+</code></pre></div>
+            
+
 
         </div>
 

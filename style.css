@@ -503,9 +503,18 @@ footer {
     font-size: 13pt;
 }
 .large-section img {
-    width: 100%;
+    max-width: 90%;
     margin-inline: auto;
     margin-block: 20px;
+}
+
+.large-section ul{
+    text-align: left;
+    font-size: 14pt;
+    padding-inline: 40px 20px;
+    margin-inline: 20px;
+    margin-bottom: 20px;
+    margin-top: 10px;
 }
 
 .bg-yellow {
