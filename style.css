@@ -211,7 +211,6 @@ header {
     background-color: rgb(218, 218, 218);
     width: 60vw;
     max-width: 1000px;
-    min-width: 550px;
     padding: 20px;
     margin-bottom: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
@@ -262,6 +261,37 @@ header {
     background-color: #045cd4;
     box-shadow: 0 0 0 #045cd4;
     transform: translateY(6px);
+}
+@media ( max-width : 640px ){
+    .Article_card {
+        width: 80vw;
+        margin-inline: auto;
+    }
+    .Article_container {
+        display: block;
+        justify-content: center;
+        padding: 10px;
+        margin: 10px 0px;
+        flex-wrap: wrap;
+    }
+    .Article_title {
+        display: block;
+    }
+    .Article_title h3 {
+        font-size: 30pt;
+    }
+    .Article_title p {
+        font-size: 16pt;
+    }
+    .Article_content {
+        font-size: 14pt;
+    }
+    .view_more {
+        width: 200px;
+        height: 50px;
+        font-size: 20px;
+    }
+    
 }
 
 
@@ -399,7 +429,6 @@ footer {
     background-color: rgb(255, 255, 255);
     width: 80vw;
     max-width: 1200px;
-    min-width: 550px;
     margin-inline: auto;
     margin-block: 20px;
     padding: 20px;
@@ -529,4 +558,43 @@ footer {
     border-radius: 5px;
     margin-inline: 5px;
     font-family: "Source Code Pro", monospace;
+}
+
+@media ( max-width : 640px ){
+    #article-main {
+        width: 90vw;
+        padding: 5px;
+    }
+    .article-head h1 {
+        font-size: 30pt;
+    }
+    .article-head .day {
+        font-size: 16px;
+    }
+    .article-head .tag {
+        font-size: 16px;
+    }
+    .large-section h2 {
+        font-size: 20pt;
+    }
+    .large-section h3 {
+        font-size: 18pt;
+    }
+    .large-section h4 {
+        font-size: 16pt;
+    }
+    .large-section p {
+        font-size: 12pt;
+    }
+    .large-section img {
+        max-width: 100%;
+        
+    }
+    .large-section ul {
+        font-size: 12pt;
+    }
+    .code_container {
+        font-size: 12pt;
+    }
+    
 }
