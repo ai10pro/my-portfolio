@@ -325,21 +325,362 @@ export default function Board() {
     );
 }
 </code></pre></div>
-            
-
-
-        </div>
-
-        <div class="large-section">
-            <h2>大見出し</h2>
-            <h3>中見出し</h3>
-            <p>コンテンツ</p>
+            <p>この変更により、Squareコンポーネントにpropsにて値を渡し、それを出力するように変更する。</p>
             <div class="code_container">
-                <pre class="prism line-numbers  language-HTML code-content">
-<code class="language-HTML" data-lang="HTML">&lt;p&gt;エスケープします&lt;/p&gt;
-&lt;p&gt;aaaaa&lt;/p&gt;</code></pre>
-            </div>
-            <img src="../../images/icon.png" alt="">
+                <pre class="prism line-numbers language-js code-content">
+<code class="language-js" data-lang="js">import { useState } from 'react';
+function Square({value}) {
+    return (
+        &ltbutton className="square"&gt{value}&lt/button&gt;
+    );
+}
+export default function Board() {
+    const [squares, setSquares] = useState(Array(9).fill(null));
+    return (
+        &lt&gt
+            &ltdiv className="board-row" &gt
+                &lt Square value={squares[0]}/&gt
+                &lt Square value={squares[1]}/&gt
+                &lt Square value={squares[2]}/&gt
+            &lt/div&gt
+            /....
+
+        &lt/&gt
+    );
+}
+</code></pre></div>
+            <p>このようにSquareコンポーネントにてpropsにて値を渡し、それを出力するように変更する。
+                <p class="bg-yellow">このように複数の子コンポーネントからデータを収集したり2つの子コンポーネント同士での通信を行う場合親コンポーネントに共有のstateを宣言する。子コンポーネントにはpropsにてデータのやり取りができ、この方法によりコンポーネントの同期を行うことができる。</p>
+                <br>ここでは値の変更処理をおこなっていないため初めに何も表示されず、ボタンを押しても何も表示されない。
+            </p>
+            <h4>クリックされた際の処理</h4>
+            <p>初めにクリックされた時、Xを表示するようにする。
+                ここで、どのマス目が埋まっているかを管理しているのは<span class="bg-code">Board</span>コンポーネントであり、<span class="bg-code">Square</span>から<span class="bg-code">Board</span>のstateを更新する手段が必要となる。あくまでstateはそれを定義するコンポーネントにプライベートなものであるため、<span class="bg-code">Square</span>から<span class="bg-code">Board</span>のstateは変更することができない。
+            <br>代わりとして、<span class="bg-code">Board</span>コンポーネントから<span class="bg-code">Square</span>コンポーネントに関数をわたすことにより、マス目がクリックされた時に<span class="bg-code">Square</span>にその関数を呼び出してもらうようにする。その関数を<span class="bg-code">onSquareClick</span>とする。
+            </p>
+            <div class="code_container">
+                <pre class="prism line-numbers language-js code-content">
+<code class="language-js" data-lang="js">function Square({value, onSquareClick}) {
+    return (
+        &ltbutton className="square" onClick={onSquareClick}&gt
+        {value}
+        &lt/button&gt
+    );
+}
+</code></pre></div>
+            <p>次にBoardコンポーネントにて<span class="bg-code">handleClick</span>として、盤面の情報を更新する関数を定義し、それをSquareコンポーネントに渡す。</p>
+            <div class="code_container">
+                <pre class="prism line-numbers language-js code-content">
+<code class="language-js" data-lang="js">export default function Board() {
+    const [squares, setSquares] = useState(Array(9).fill(null));
+    function handleClick() {
+        const newSquares = squares.slice();
+        nextSquares[0] = 'X';
+        setSquares(nextSquares);
+    }
+    return (
+        //...
+    );
+}
+</code></pre></div>
+            <p><span class="bg-code">handleClick</span>関数は初めに配列のコピーを行い次の配列の準備をする。次に配列の中身をへこうする処理を行いその配列を<span class="bg-code">setSquares</span>に通し、盤面情報を管理する配列を更新する。</p>
+            <div class="code_container">
+                <pre class="prism line numbers language-js code-content">
+<code class="language-js" data-lang="js">export default function Board() {
+    const [squares, setSquares] = useState(Array(9).fill(null));
+    function handleClick(i) {
+        const newSquares = squares.slice();
+        newSquares[i] = 'X';
+        setSquares(newSquares);
+    }
+    return (
+        //...
+    );
+}
+</code></pre></div>
+            <p>次にSquareコンポーネントにてこの関数を呼び出しは次のようにする。</p>
+            <div class="code_container">
+                <pre class="prism line-numbers language-js code-content">
+<code class="language-js" data-lang="js">&ltSquare value={squares[0]} onSquareClick={handleClick(0)} /&gt</code></pre></div>
+            <p>しかし、このプログラムでは正しく動作しない。onSquareClickに関数を渡すつもりが、<span class="bg-code">handleClick(0)</span>の実行値を渡す式となってしまっている。これを解決し、ユーザーがクリックしたときに、正しく関数が動くようにするために、<span class="bg-code">handleClick(0)</span>を呼び出すための関数を次のようにつくる。</p>
+            <div class="code_container">
+                <pre class="prism line-numbers language-js code-content">
+<code class="language-js" data-lang="js">&ltSquare value={squares[0]} onSquareClick={() =&gt handleClick(0)} /&gt</code></pre></div>
+            <p><span class="bg-code">()=&gt</span>はアロー関数と呼ばれ、関数名を命名しない無名関数の1つ。ここではSquareにアローの無名関数を渡し、その関数を実行することにより実質的に<span class="bg-code">handleClick(i)</span>を実行していることとなる。他のマスも同様にすることで正しく処理ができる。</p>
+            <p>ここまでのコード一は次のようになる。</p>
+            <div class="code_container">
+                <pre class="prism line-numbers language-js code-content">
+<code class="language-js" data-lang="js">import { useState } from "react";
+function Square({ value, onSquareClick }) {
+    return (
+        &lt;button className="square" onClick={onSquareClick}&gt;
+        {value}
+        &lt;/button&gt;
+    );
+}
+    
+export default function Board() {
+    const [squares, setSquares] = useState(Array(9).fill(null));
+    function handleClick(i) {
+        const nextSquares = squares.slice();
+        nextSquares[i] = "X";
+        setSquares(nextSquares);
+    }
+    return (
+        &lt;&gt;
+            &lt;div className="board-row"&gt;
+                &lt;Square value={squares[0]} onSquareClick={() =&gt; handleClick(0)} /&gt;
+                &lt;Square value={squares[1]} onSquareClick={() =&gt; handleClick(1)} /&gt;
+                &lt;Square value={squares[2]} onSquareClick={() =&gt; handleClick(2)} /&gt;
+            &lt;/div&gt;
+            &lt;div className="board-row"&gt;
+                &lt;Square value={squares[3]} onSquareClick={() =&gt; handleClick(3)} /&gt;
+                &lt;Square value={squares[4]} onSquareClick={() =&gt; handleClick(4)} /&gt;
+                &lt;Square value={squares[5]} onSquareClick={() =&gt; handleClick(5)} /&gt;
+            &lt;/div&gt;
+            &lt;div className="board-row"&gt;
+                &lt;Square value={squares[6]} onSquareClick={() =&gt; handleClick(6)} /&gt;
+                &lt;Square value={squares[7]} onSquareClick={() =&gt; handleClick(7)} /&gt;
+                &lt;Square value={squares[8]} onSquareClick={() =&gt; handleClick(8)} /&gt;
+            &lt;/div&gt;
+        &lt;/&gt;
+    );
+}
+</code></pre></div>
+            <h4>○を表示する</h4>
+            <p>今の状態ではXしか入力できないため○の入力の処理を作成する。先手を"X"とし、現在の手番の追跡を行うstateを追加する。</p>
+            <div class="code_container">
+                <pre class="prism line-numbers language-js code-content">
+<code class="language-js" data-lang="js">export default function Board() {
+    const [squares, setSquares] = useState(Array(9).fill(null));    // 盤面の状態
+    const [xIsNext, setXIsNext] = useState(true);                   // 次の手番が"X"かどうか
+
+    //...
+}
+</code></pre></div>
+            <p><span class="bg-code">xIsNext</span>はプレイヤーが着手するたびに反転するため<span class="bg-code">headClick</span>関数にて処理を行えば良い。</p>
+            <div class="code_container">
+                <pre class="prism line-numbers language-js code-content">
+<code class="language-js" data-lang="js">export default function Board() {
+    //...
+    function handleClick(i) {
+        const nextSquares = squares.slice();
+        if (xIsNext) {              // 次の手番が"X"の場合
+            nextSquares[i] = "X";   
+        } else {                    // 次の手番が"O"の場合
+            nextSquares[i] = "O";
+        }
+        setSquares(nextSquares);    // 盤面の状態を更新
+        setXIsNext(!xIsNext);       // 次の手番を更新
+    }
+    //...
+}
+</code></pre></div>
+            <p>動作結果は次のようになる。クリックするごとに◯とXが入れ替わることが確認できる。</p>
+            <img src="../../images/articles/01_react/007.png" alt="">
+            <p>ここで1つ問題がある。すでに入力された部分を再度入力することで上書きができてしまう。三目並べという同じパターンになってしまうゲームのためそのようなルールは面白いが今回はそのようなルールは考えないためすでに入力された部分には入力できないようにする必要がある。
+            <br>対処として、クリックされた時、そのマスに何かしらの値が入っている場合盤面や手番の更新を行わないことで対応する。
+            </p>
+            <div class="code_container">
+                <pre class="prism line-numbers language-js code-content">
+<code class="language-js" data-lang="js">function headClick() {
+    if (squares[i]) {
+        return;
+    }
+    const nextSquares = squares.slice();
+    //...
+}
+</code></pre></div>
+            <p>ここまでのコードは次のようになる。</p>
+            <div class="code_container">
+                <pre class="prism line-numbers language-js code-content">
+<code class="language-js" data-lang="js">import { useState } from "react";
+function Square({ value, onSquareClick }) {
+    return (
+        &lt;button className="square" onClick={onSquareClick}&gt;
+        {value}
+        &lt;/button&gt;
+    );
+}
+    
+export default function Board() {
+    const [squares, setSquares] = useState(Array(9).fill(null));
+    const [xIsNext, setXIsNext] = useState(true);
+    function handleClick(i) {
+        if (squares[i]) {
+            // console.log("filled!");
+            return;
+        }
+        const nextSquares = squares.slice();
+        if (xIsNext) {  // 次の手番が"X"の場合
+            nextSquares[i] = "X";
+        } else {        // 次の手番が"O"の場合
+            nextSquares[i] = "O";   
+        }
+        setSquares(nextSquares); // 盤面の状態を更新
+        setXIsNext(!xIsNext); // 次の手番を更新
+    }
+    return (
+        &lt;&gt;
+            &lt;div className="board-row"&gt;
+                &lt;Square value={squares[0]} onSquareClick={() =&gt; handleClick(0)} /&gt;
+                &lt;Square value={squares[1]} onSquareClick={() =&gt; handleClick(1)} /&gt;
+                &lt;Square value={squares[2]} onSquareClick={() =&gt; handleClick(2)} /&gt;
+            &lt;/div&gt;
+            &lt;div className="board-row"&gt;
+                &lt;Square value={squares[3]} onSquareClick={() =&gt; handleClick(3)} /&gt;
+                &lt;Square value={squares[4]} onSquareClick={() =&gt; handleClick(4)} /&gt;
+                &lt;Square value={squares[5]} onSquareClick={() =&gt; handleClick(5)} /&gt;
+            &lt;/div&gt;
+            &lt;div className="board-row"&gt;
+                &lt;Square value={squares[6]} onSquareClick={() =&gt; handleClick(6)} /&gt;
+                &lt;Square value={squares[7]} onSquareClick={() =&gt; handleClick(7)} /&gt;
+                &lt;Square value={squares[8]} onSquareClick={() =&gt; handleClick(8)} /&gt;
+            &lt;/div&gt;
+        &lt;/&gt;
+    );
+}
+</code></pre></div>
+            <h3>終了処理</h3>
+            <p>前編のゴールとして終了の処理を実装する。9つのマスの中で縦・横・斜めのいずれかにおいて3連続並べることで勝利を確定することができる。
+            <br>勝利判定として8パターンあるので、それぞれのマスの番号を配列として渡し、その値全てが等しい時に勝利とすれば良い。この処理を行う関数を<span class="bg-code">calculateWinner</span>として定義する。
+            </p>
+            <div class="code_container">
+                <pre class="prism line-numbers language-js code-content">
+<code class="language-js" data-lang="js">function calculateWinner(squares) {
+    const lines = [
+        [0, 1, 2], [3, 4, 5], [6, 7, 8], // 横
+        [0, 3, 6], [1, 4, 7], [2, 5, 8], // 縦
+        [0, 4, 8], [2, 4, 6] // 斜め
+    ];
+    for (let i = 0; i &lt lines.length; i++) {
+        const [a, b, c] = lines[i];
+        if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
+            return squares[a];
+        }
+    }
+    return null;
+}
+</code></pre></div>
+            <p>この関数はReact特有ではないためあまり重要視しない。ただし、この判定方法はゲームなどにおいては多く用いる場面が多い。</p>
+            <p>この関数の呼び出しは<span class="bg-code">handleClick</span>関数内で読み込み追加入力ができないようにすると同時に勝利宣言をする。</p>
+            <div class="code_container">
+                <pre class="prism line-numbers language-js code-content">
+<code class="language-js" data-lang="js">function handleClick(i) {
+    if (squares[i] || calculateWinner(squares)) {
+        return;
+    }
+    const nextSquares = squares.slice();
+    //...
+}
+</code></pre></div>
+            <h4>勝利した者のUI表示</h4>
+            <p>現在の状態の出力のために新たにdivを用意し、その中にステータス状態を入れることで文字の出力を考える。
+            </p>
+            <div class="code_container">
+                <pre class="prism line-numbers language-js code-content">
+<code class="language-js" data-lang="js">export default function Board() {
+    //...
+    const winner = calculateWinner(squares);
+    let status;
+    if (winner) {
+        status = "Winner: " + winner;
+    } else {
+        status = "Next player: " + (xIsNext ? "X" : "O");
+    }
+    return (
+        &lt;&gt;
+            &lt;div className="status"&gt;{status}&lt;/div&gt;
+            &lt;div className="board-row"&gt;
+                //...
+    )
+}
+</code></pre></div>
+            <p>このように勝利者がいる場合、その勝利者を表示するようにする。このようにすることで勝利者が表示されるようになる。</p>
+            <img src="../../images/articles/01_react/008.png" alt="">
+            <p>これで今回の目標であるゲーム自体の作成に到達できた。この段階でのプログラムを示す。</p>
+            <div class="code_container">
+                <pre class="prism line-numbers language-js code-content">
+<code class="language-js" data-lang="js">import { useState } from "react";
+function Square({ value, onSquareClick }) {
+  return (
+    &lt;button className="square" onClick={onSquareClick}&gt;
+      {value}
+    &lt;/button&gt;
+  );
+}
+
+export default function Board() {
+  const [squares, setSquares] = useState(Array(9).fill(null));
+  const [xIsNext, setXIsNext] = useState(true);
+  function handleClick(i) {
+    if (squares[i] || calculateWinner(squares)) {
+      console.log("win!");
+      return;
+    }
+    const nextSquares = squares.slice();
+    if (xIsNext) {
+      // 次の手番が"X"の場合
+      nextSquares[i] = "X";
+    } else {
+      // 次の手番が"O"の場合
+      nextSquares[i] = "O";
+    }
+    setSquares(nextSquares); // 盤面の状態を更新
+    setXIsNext(!xIsNext); // 次の手番を更新
+  }
+  const winner = calculateWinner(squares);
+  let status;
+  if (winner) {
+    status = "Winner: " + winner;
+  } else {
+    status = "Next player: " + (xIsNext ? "X" : "O");
+  }
+  return (
+    &lt;&gt;
+      &lt;div className="status"&gt;{status}&lt;/div&gt;
+      &lt;div className="board-row"&gt;
+        &lt;Square value={squares[0]} onSquareClick={() =&gt; handleClick(0)} /&gt;
+        &lt;Square value={squares[1]} onSquareClick={() =&gt; handleClick(1)} /&gt;
+        &lt;Square value={squares[2]} onSquareClick={() =&gt; handleClick(2)} /&gt;
+      &lt;/div&gt;
+      &lt;div className="board-row"&gt;
+        &lt;Square value={squares[3]} onSquareClick={() =&gt; handleClick(3)} /&gt;
+        &lt;Square value={squares[4]} onSquareClick={() =&gt; handleClick(4)} /&gt;
+        &lt;Square value={squares[5]} onSquareClick={() =&gt; handleClick(5)} /&gt;
+      &lt;/div&gt;
+      &lt;div className="board-row"&gt;
+        &lt;Square value={squares[6]} onSquareClick={() =&gt; handleClick(6)} /&gt;
+        &lt;Square value={squares[7]} onSquareClick={() =&gt; handleClick(7)} /&gt;
+        &lt;Square value={squares[8]} onSquareClick={() =&gt; handleClick(8)} /&gt;
+      &lt;/div&gt;
+    &lt;/&gt;
+  );
+}
+
+function calculateWinner(squares) {
+  const lines = [
+    [0, 1, 2], [3, 4, 5], [6, 7, 8], // 横
+    [0, 3, 6], [1, 4, 7], [2, 5, 8], // 縦
+    [0, 4, 8], [2, 4, 6], // 斜め
+  ];
+  for (let i = 0; i &lt lines.length; i++) {
+    const [a, b, c] = lines[i];
+    if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
+      return squares[a];
+    }
+  }
+  return null;
+}
+</code></pre></div>
+        </div>
+        <div class="large-section">
+            <h2>まとめ</h2>
+            <p>以前Reactを触ったことがある筆者が全てを理解しながら大体1時間ほどで学ことができた。Reactには今回触れた内容以外にもReactならではの部分があり今後はそれに触れることができれば良いと思う。
+            </p>
+            <p>React入門において公式チュートリアルはかなり良いものであった。あまりブログなどでチュートリアルが取り上げられておらず学ぶ方法も限られているが広く普及されれば良いなと思っている。</p>
+            <p>次回はこの続きである過去に戻る処理を追加したい。また今後実際にフロントエンドでの作業方法なども勉強できれば良い。</p>
+            <p>本コンテンツの作成時間（HTML/CSS/JavaScriptの設計・実装を含む）:約16時間</p>
         </div>
     </main>
 
