@@ -533,6 +533,7 @@ footer {
 }
 .large-section img {
     max-width: 90%;
+    min-width: 20%;
     margin-inline: auto;
     margin-block: 20px;
 }

@@ -263,7 +263,7 @@ function handleClick() {
             </p>
             
             <p>次にSquareコンポーネントにてクリックされたことを記憶し、"X"を表示する機能を実装する。「記憶」するためにはReactコンポーネントの<span class="bg-yellow">state</span>というものを利用する。
-            <br>ReactはuseStateと関数の提供があり、これを利用することでコンポーネント内で状態を保持することができる。useStateは配列を返し、その中に状態の初期値を入れることができる。また、useStateは2つの要素を返す。1つ目は状態の値、2つ目は状態を更新するための関数である。
+            <br>ReactはuseStateと関数の提供があり、これを利用することでコンポーネント内で状態を保持することができる。useStateは配列を返し、その中に状態の初期値を入れることができる。また、useStateは2つの要素を返す。1つ目は状態の値、2つ目は状態を更新するための関数である。</p>
             <p>ファイルの先頭にて<span class="bg-code">useState</span>をインポートし<span class="bg-code">Square</span>関数からvalueのpropsプロパティを削除する。その代わりに2つの要素の配列にて<span class="bg-code">useState</span>を呼び出す。</p>
             <div class="code_container">
                 <pre class="prism line-numbers language-js code-content">
@@ -279,7 +279,8 @@ function Square() {
             <p><span class="bg-code">value</span>がstateの現在の値を格納し、<span class="bg-code">setValue</span>はその値の更新に使う関数ということになる。<span class="bg-code">useState</span>にわたすNullはstate変数の初期値として使用するため今回の場合<span class="bg-code">value</span>は<span class="bg-code">null</span>という値から処理が行われる</p>
             <p>次に<span class="bg-code">handleClick</span>関数内で<span class="bg-code">setValue</span>を使い、クリックされた際にvalueの値を変更する。ここでは"X"を表示するようにする。
             <br>値の変更には先ほど定義している<span class="bg-code">setValue</span>関数を使用し以下のような記述を行う。</p>
-            <br>また、コンポーネント自体がpropsの受け取りを行わないため、Boardコンポーネントので呼び出されるSquareコンポーネントのpropsを削除する。</p>
+            <p>また、コンポーネント自体がpropsの受け取りを行わないため、Boardコンポーネントので呼び出されるSquareコンポーネントのpropsを削除する。</p>
+        
             <div class="code_container">
                 <pre class="prism line-numbers language-js code-content">
 <code class="language-js" data-lang="js">import { useState } from 'react';
@@ -352,7 +353,7 @@ export default function Board() {
 </code></pre></div>
             <p>このようにSquareコンポーネントにてpropsにて値を渡し、それを出力するように変更する。
                 <p class="bg-yellow">このように複数の子コンポーネントからデータを収集したり2つの子コンポーネント同士での通信を行う場合親コンポーネントに共有のstateを宣言する。子コンポーネントにはpropsにてデータのやり取りができ、この方法によりコンポーネントの同期を行うことができる。</p>
-                <br>ここでは値の変更処理をおこなっていないため初めに何も表示されず、ボタンを押しても何も表示されない。
+                <p>ここでは値の変更処理をおこなっていないため初めに何も表示されず、ボタンを押しても何も表示されない。</p>
             </p>
             <h4>クリックされた際の処理</h4>
             <p>初めにクリックされた時、Xを表示するようにする。
