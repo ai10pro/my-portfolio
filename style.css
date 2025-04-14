@@ -154,6 +154,21 @@ header {
 .timeline h3 {
     text-decoration: wavy underline #0bb870;
 }
+
+.timeline-date {
+    margin-right: 20px;
+}
+.timeline-content a {
+    text-decoration: none;
+    color: #7371f8;
+    font-weight: bold;
+    border-bottom: #c4c3fa solid 2px;
+}
+.timeline-content a:before {
+    content:'\f0c1';
+    font-family: 'Font Awesome 5 Free';
+}
+
 @media ( min-width : 640px ){
     .timeline > li {
         overflow: hidden;
@@ -181,8 +196,8 @@ header {
         height: 12px;
         background: #00c3ff;
         position: absolute;
-        left: 106px;
-        top: 24px;
+        left: 126px;
+        top: 35px;
         border-radius: 100%;
     }
 
