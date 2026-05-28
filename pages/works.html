@@ -72,7 +72,9 @@
         list.innerHTML = works.map(work => `
           <div class="work-card">
             <div class="work-card-thumbnail">
-              <img src="${work.thumbnail}" alt="${work.title}" loading="lazy" />
+              ${work.thumbnail
+                ? `<img src="${work.thumbnail}" alt="${work.title}" loading="lazy" />`
+                : `<span class="no-image">No Image</span>`}
             </div>
             <div class="work-card-body">
               <p class="work-card-date">${work.date}</p>
@@ -122,6 +124,13 @@
 
       function renderModalMedia() {
         const viewer = document.getElementById('modal-media-viewer');
+
+        if (currentMediaList.length === 0) {
+          viewer.innerHTML = `<span style="color:#888; font-size:0.9rem;">No Image</span>`;
+          document.getElementById('modal-media-nav').style.display = 'none';
+          return;
+        }
+
         const src = currentMediaList[currentMediaIndex];
         const isVideo = src.endsWith('.mp4') || src.endsWith('.webm');
 

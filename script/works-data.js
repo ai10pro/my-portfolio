@@ -1,5 +1,81 @@
 const worksData = [
   {
+    id: "zenn",
+    date: "2026/2",
+    title: "RDBMS応用概念 ビューとCTE",
+    shortDesc: "ZennにRDBMSの応用概念であるビュー（VIEW）とCTE（WITH句）についての技術記事を投稿。",
+    fullDesc: "RDBMSの高度な機能であるビュー（VIEW）と共通テーブル式（CTE）について解説した技術記事です。通常のビューとマテリアライズドビューの違い、通常CTEと再帰CTEの使い分けを、カフェチェーンの経営分析を例に実践的にまとめています。",
+    thumbnail: "",
+    media: [],
+    links: [
+      { label: "記事を読む", url: "https://zenn.dev/ai10pro/articles/2026-02_view-cte" },
+      { label: "GitHub（サンプルコード）", url: "https://github.com/ai10pro/view-cte_zenn-blog" }
+    ],
+    tags: ["Zenn", "SQL", "RDBMS", "PostgreSQL"]
+  },
+  {
+    id: "hybrid-office",
+    date: "2025/11",
+    title: "VR×AR ハイブリッドオフィス接続システム",
+    shortDesc: "PBL2でチーム開発。Webカメラで顔の向きを検知し、音声の左右バランスをリアルタイム変化させるハイブリッドオフィスシステム。",
+    fullDesc: "PBL2（プロジェクト学習）にてチームで開発したデモンストレーション用プロトタイプです。リモートと現場の自然な共存を実現するというコンセプトで、Webカメラで顔の向きを検知しリアル側スピーカーの音声左右バランスをリアルタイムで変化させます。複数の拠点（モニターA・B等）への切り替えも可能。外部クラウドを使わずLAN内で完結する低遅延・高セキュリティな設計です。",
+    thumbnail: "",
+    media: [],
+    links: [
+      { label: "GitHub", url: "https://github.com/ai10pro/hybrid-office" }
+    ],
+    tags: ["Next.js", "Node.js", "Socket.io", "WebRTC", "MediaPipe", "Three.js", "チーム開発"]
+  },
+  {
+    id: "ctmr-viewer",
+    date: "2025/11",
+    title: "Advanced DICOM Viewer",
+    shortDesc: "授業でPythonとPySide6を使って開発したCT・MRI等の医療用DICOM画像ビューワー。",
+    fullDesc: "PySide6（Qt）をベースに開発した多機能な医用画像ビューワーです。DICOM形式（.dcm）ファイルを読み込み、Hounsfield Unit変換やWindow/Level調整によるコントラスト・輝度の動的変更、ズーム・パン操作に対応しています。軸状断（Axial）・冠状断（Coronal）・矢状断（Sagittal）の3断面を同時表示するMPR（多断面再構成）機能も実装しています。",
+    thumbnail: "https://raw.githubusercontent.com/ai10pro/ctmr_viewer/main/images/03_loaded.png",
+    media: [
+      "https://raw.githubusercontent.com/ai10pro/ctmr_viewer/main/images/03_loaded.png",
+      "https://raw.githubusercontent.com/ai10pro/ctmr_viewer/main/images/07_tadannHome.png"
+    ],
+    links: [
+      { label: "GitHub", url: "https://github.com/ai10pro/ctmr_viewer" }
+    ],
+    tags: ["Python", "PySide6", "DICOM", "医療画像", "MPR"]
+  },
+  {
+    id: "kosen-signage",
+    date: "2025/9",
+    title: "高専祭デジタルサイネージシステム（本番）",
+    shortDesc: "高専祭の来場者向けに展示・イベント情報をリアルタイム表示する本番用サイネージシステム。",
+    fullDesc: "高専祭の来場者向けに展示やイベント情報をリアルタイムで表示する本番運用向けのデジタルサイネージシステムです。Next.js + Tailwind CSS でUIを構築し、Supabase + PostgreSQLでバックエンドを管理。Prisma ORMとShadcn UIを採用し、Raspberry Pi 4B/5での実機運用を想定した設計です。未完成ですが、Issue管理・プルリクエスト運用など本番を意識したチーム開発フローで進めました。",
+    thumbnail: "../images/works/202502-signage-app-1.png",
+    media: [
+      "../images/works/202502-signage-app-1.png",
+      "../images/works/202502-signage-app-2.png"
+    ],
+    links: [
+      { label: "GitHub", url: "https://github.com/ai10pro/kosen-festival-signage-system" },
+      { label: "デプロイ（Vercel）", url: "https://kosen-festival-signage-system.vercel.app" }
+    ],
+    tags: ["Next.js", "TypeScript", "Tailwind CSS", "Supabase", "PostgreSQL", "Prisma", "Raspberry Pi"]
+  },
+  {
+    id: "a-star",
+    date: "2025/7",
+    title: "A*探索アルゴリズム可視化アプリ",
+    shortDesc: "Google Gemini Canvasで構築。グリッド上のA*探索をリアルタイム可視化し、ステップごとの判断プロセスを学べるアプリ。",
+    fullDesc: "Google Gemini Canvas機能を使って構築したA*（A-star）探索アルゴリズムの可視化アプリです。10×10グリッド上でスタートからゴールまでの最短経路探索をリアルタイムで表示します。1ステップずつ進める・戻すステップ実行制御、スタート・ゴール・障害物の手動配置、マンハッタン距離とユークリッド距離のヒューリスティック切り替え・比較モードを搭載。各ステップの評価ノードをコンソールログで確認できます。",
+    thumbnail: "../images/works/a-star_01.png",
+    media: [
+      "../images/works/a-star_01.png",
+      "../images/works/a-star_02.png"
+    ],
+    links: [
+      { label: "GitHub", url: "https://github.com/ai10pro/a-star_algo" }
+    ],
+    tags: ["AI", "アルゴリズム", "Gemini Canvas", "可視化"]
+  },
+  {
     id: "signage",
     date: "2025/3",
     title: "デジタルサイネージアプリのベース作成",
@@ -14,6 +90,19 @@ const worksData = [
       { label: "GitHub", url: "https://github.com/ai10pro/digital-signage-app" }
     ],
     tags: ["Next.js", "React", "Supabase"]
+  },
+  {
+    id: "linux-server",
+    date: "2025/2",
+    title: "Linuxサーバ構築手順書",
+    shortDesc: "Linux・UbuntuによるWebサーバー構築をPDF形式でまとめた実践的な手順書。",
+    fullDesc: "Linux（Ubuntu）を使ったWebサーバー構築の手順をまとめた実践的なチュートリアルドキュメントです。LaTeXで作成しPDF形式で提供しており、セットアップから実際の設定までを段階的に確認しながら進められる構成になっています。",
+    thumbnail: "",
+    media: [],
+    links: [
+      { label: "GitHub", url: "https://github.com/ai10pro/linux-sever" }
+    ],
+    tags: ["Linux", "Ubuntu", "サーバー構築", "LaTeX", "ドキュメント"]
   },
   {
     id: "bousai",
