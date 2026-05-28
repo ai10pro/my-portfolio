@@ -51,10 +51,11 @@ const worksData = [
     title: "高専祭デジタルサイネージシステム（本番）",
     shortDesc: "高専祭の来場者向けに展示・イベント情報をリアルタイム表示する本番用サイネージシステム。",
     fullDesc: "高専祭の来場者向けに展示やイベント情報をリアルタイムで表示する本番運用向けのデジタルサイネージシステムです。Next.js + Tailwind CSS でUIを構築し、Supabase + PostgreSQLでバックエンドを管理。Prisma ORMとShadcn UIを採用し、Raspberry Pi 4B/5での実機運用を想定した設計です。未完成ですが、Issue管理・プルリクエスト運用など本番を意識したチーム開発フローで進めました。",
-    thumbnail: "../images/works/202502-signage-app-1.png",
+    thumbnail: "../images/works/fes-signage_01.png",
     media: [
-      "../images/works/202502-signage-app-1.png",
-      "../images/works/202502-signage-app-2.png"
+      "../images/works/fes-signage_01.png",
+      "../images/works/fes-signage_02.png",
+      "../images/works/fes-signage_03.png"
     ],
     links: [
       { label: "GitHub", url: "https://github.com/ai10pro/kosen-festival-signage-system" },
