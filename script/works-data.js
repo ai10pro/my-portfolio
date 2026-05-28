@@ -5,8 +5,11 @@ const worksData = [
     title: "RDBMS応用概念 ビューとCTE",
     shortDesc: "ZennにRDBMSの応用概念であるビュー（VIEW）とCTE（WITH句）についての技術記事を投稿。",
     fullDesc: "RDBMSの高度な機能であるビュー（VIEW）と共通テーブル式（CTE）について解説した技術記事です。通常のビューとマテリアライズドビューの違い、通常CTEと再帰CTEの使い分けを、カフェチェーンの経営分析を例に実践的にまとめています。",
-    thumbnail: "",
-    media: [],
+    thumbnail: "../images/works/zenn_viewcte01.png",
+    media: [
+      "../images/works/zenn_viewcte01.png",
+      "../images/works/zenn_viewcte02.png"
+    ],
     links: [
       { label: "記事を読む", url: "https://zenn.dev/ai10pro/articles/2026-02_view-cte" },
       { label: "GitHub（サンプルコード）", url: "https://github.com/ai10pro/view-cte_zenn-blog" }
@@ -97,8 +100,11 @@ const worksData = [
     title: "Linuxサーバ構築手順書",
     shortDesc: "Linux・UbuntuによるWebサーバー構築をPDF形式でまとめた実践的な手順書。",
     fullDesc: "Linux（Ubuntu）を使ったWebサーバー構築の手順をまとめた実践的なチュートリアルドキュメントです。LaTeXで作成しPDF形式で提供しており、セットアップから実際の設定までを段階的に確認しながら進められる構成になっています。",
-    thumbnail: "",
-    media: [],
+    thumbnail: "../images/works/linux_01.png",
+    media: [
+      "../images/works/linux_01.png",
+      "../images/works/linux_02.png"
+    ],
     links: [
       { label: "GitHub", url: "https://github.com/ai10pro/linux-sever" }
     ],
