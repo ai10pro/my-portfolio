@@ -3,6 +3,11 @@
 @import url('https://fonts.googleapis.com/css2?family=DotGothic16&family=Noto+Sans+JP&family=Roboto&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap');
 
+html, body {
+    overflow-x: hidden;
+    max-width: 100%;
+}
+
 body {
     font-family: 'Noto Sans JP', sans-serif;
     font-weight: 400;
@@ -278,6 +283,41 @@ header {
     transform: translateY(6px);
 }
 @media ( max-width : 640px ){
+    /* 共通 */
+    h2 {
+        font-size: 36px;
+    }
+
+    /* ヒーロー */
+    .head_container h1 {
+        padding-top: 35vh;
+        font-size: 36px;
+    }
+
+    /* About Me */
+    .about_me_section {
+        margin-inline: 10px;
+    }
+    .about_me_section_container {
+        padding: 15px;
+        flex-direction: column;
+        align-items: center;
+    }
+    .about_me_section_container img {
+        width: 160px;
+        height: 160px;
+    }
+    .about_me_section_container table {
+        width: 100%;
+        font-size: 13px;
+        padding-inline: 0;
+        margin-top: 15px;
+    }
+    .about_me_section_container table td {
+        word-break: break-all;
+    }
+
+    /* Article */
     .Article_card {
         width: 80vw;
         margin-inline: auto;
@@ -293,23 +333,26 @@ header {
         display: block;
     }
     .Article_title h3 {
-        font-size: 30pt;
+        font-size: 18pt;
     }
     .Article_title p {
-        font-size: 16pt;
+        font-size: 12pt;
     }
     .Article_content {
-        font-size: 14pt;
+        font-size: 12pt;
     }
     .view_more {
-        width: 200px;
-        height: 50px;
-        font-size: 20px;
+        width: 180px;
+        height: 44px;
+        font-size: 16px;
     }
-    
 }
 
 
+
+main {
+    padding-bottom: 60px;
+}
 
 /* フッター */
 footer {
@@ -734,6 +777,51 @@ footer {
     font-size: 30px;
     font-weight: 800;
     padding-top: 10px;
+}
+
+@media (max-width: 640px) {
+    .skills_section {
+        padding: 0 4%;
+        box-sizing: border-box;
+    }
+
+    .skills_section .container {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0;
+        width: 100%;
+        margin: 0;
+    }
+
+    .skills_section .container .card {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 16px;
+        padding: 10px 16px;
+        margin: 0;
+        min-width: 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        box-shadow: none;
+        background-color: rgba(0, 0, 0, 0.3);
+    }
+
+    .skills_section .container .card img {
+        width: 40px;
+        height: 40px;
+        flex-shrink: 0;
+    }
+
+    .skills_section .container .card p {
+        font-size: 15px;
+        font-weight: 600;
+        padding-top: 0;
+        text-align: left;
+        margin: 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
 }
 
 /* Articleたち */
