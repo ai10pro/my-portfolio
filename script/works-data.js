@@ -22,8 +22,11 @@ const worksData = [
     title: "VR×AR ハイブリッドオフィス接続システム",
     shortDesc: "PBL2でチーム開発。Webカメラで顔の向きを検知し、音声の左右バランスをリアルタイム変化させるハイブリッドオフィスシステム。",
     fullDesc: "PBL2（プロジェクト学習）にてチームで開発したデモンストレーション用プロトタイプです。リモートと現場の自然な共存を実現するというコンセプトで、Webカメラで顔の向きを検知しリアル側スピーカーの音声左右バランスをリアルタイムで変化させます。複数の拠点（モニターA・B等）への切り替えも可能。外部クラウドを使わずLAN内で完結する低遅延・高セキュリティな設計です。",
-    thumbnail: "",
-    media: [],
+    thumbnail: "../images/works/hybrid-office-01.png",
+    media: [
+      "../images/works/hybrid-office-01.png",
+      "../images/works/hybrid-office-02.png"
+    ],
     links: [
       { label: "GitHub", url: "https://github.com/ai10pro/hybrid-office" }
     ],
